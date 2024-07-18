@@ -65,7 +65,7 @@ def get_embedding(face_pixels):
 
 
 # Загрузка модели SVM
-model_save_path = '77-80%/svm_gender_classifier.pkl'
+model_save_path = 'learned_model/svm_gender_classifier.pkl'
 svm_model = joblib.load(model_save_path)
 
 

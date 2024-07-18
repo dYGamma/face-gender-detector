@@ -61,7 +61,7 @@ def get_embedding(face_pixels):
     return embedding[0]
 
 # Загрузка модели SVM
-model_save_path = '77-80%/svm_gender_classifier.pkl'
+model_save_path = 'learned_model/svm_gender_classifier.pkl'
 svm_model = joblib.load(model_save_path)
 
 # Функция для предсказания пола на основе изображения
@@ -73,7 +73,7 @@ def predict_gender(image):
         gender = "Male" if prediction[0] == 1 else "Female"
         return gender, box
     else:
-        raise ValueError("No face detected in the image")
+        raise ValueError("Лицо не разпознано")
 
 # Функция для рисования прямоугольника и надписи
 def draw_label(image, box, gender):
@@ -84,10 +84,10 @@ def draw_label(image, box, gender):
     cv2.putText(image, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
 
 # Создание веб-приложения с помощью Streamlit
-st.title("Gender Classification")
-st.write("Upload an image and the model will predict the gender.")
+st.title("Нейросеть для распознавания пола")
+st.write("Загрузите изображение и модель определит ваш пол.")
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Выберите изображение...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = np.array(cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR))
@@ -97,8 +97,9 @@ if uploaded_file is not None:
     try:
         gender, box = predict_gender(image)
         draw_label(image_rgb, box, gender)
-        st.image(image_rgb, caption="Uploaded Image with Prediction", use_column_width=True)
-        st.write(f"The predicted gender is: {gender}")
+        st.image(image_rgb, caption="Ваше изображение", use_column_width=True)
+        gender_rus = "Мужской пол" if gender == "Male" else "Женский пол"
+        st.write(f"Гендер человека на основе изображения: {gender_rus}")
     except ValueError as e:
-        st.image(image_rgb, caption="Uploaded Image", use_column_width=True)
+        st.image(image_rgb, caption="Загруженное изображение", use_column_width=True)
         st.write(f"Error: {str(e)}")
