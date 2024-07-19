@@ -1,14 +1,15 @@
 {
     "builds": [
       {
-        "src": "Dockerfile",
-        "use": "@vercel/docker"
+        "src": "usagePrime.py",
+        "use": "@vercel/python",
+        "config": { "distDir": "public" }
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/"
+        "dest": "usagePrime.py"
       }
     ]
   }
