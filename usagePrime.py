@@ -84,7 +84,7 @@ def draw_label(image, box, gender):
     cv2.putText(image, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
 
 # Создание веб-приложения с помощью Streamlit
-st.title("Нейросеть для распознавания пола")
+st.title("Обученная модель для распознования пола")
 st.write("Загрузите изображение и модель определит ваш пол.")
 
 uploaded_file = st.file_uploader("Выберите изображение...", type=["jpg", "jpeg", "png"])
