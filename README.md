@@ -22,4 +22,4 @@
 
 Команда для запуска: `streamlit run путь к usagePrime.py`.
 # Пример работы модели
-<img src="" />
+<img src="https://github.com/dYGamma/face-gender-detector/blob/main/test/testf.png" />
